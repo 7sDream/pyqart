@@ -79,7 +79,7 @@ What you will see depends on your font setting, I'm using Dejavu Sans Mono.
 
 Yes, StringPrinter is useful for only those small QrCode. 
 
-### Art Part
+### The Art Part
 
 I'm working on it.
 
