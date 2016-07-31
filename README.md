@@ -1,10 +1,10 @@
-# pyqart - Python implement of QArt
+# PyQArt - Python implement of QArt
 
 [中文版 README](https://github.com/7sDream/pyqart/blob/master/README.zh.md)
 
 ## introduction
 
-QArt is a method of combining QrCode of an URL with any image, which was submitted in [an article][[qart_article] writen by [Russ Cox][russ_cos_google_plus] on his personal website.
+QArt is a method of combining QrCode of an URL with any image, which was submitted in [an article][qart_article] writen by [Russ Cox][russ_cos_google_plus] on his personal website.
 
 An Example(come from the article):
 
@@ -94,7 +94,7 @@ I'm working on it.
 
 ## Other Implement
 
-- Golang: [qr] by [Russ Cox][russ_cos_google_plus]
+- Golang: [qr][qr] by [Russ Cox][russ_cos_google_plus]
 - Java: [qart4j][qart4j] by [dieforfree][dieforfree]
 
 ## Acknowledgements
@@ -112,6 +112,7 @@ See LICENSE.
 
 [russ_cos_google_plus]: https://plus.google.com/+RussCox-rsc
 [qart_article]: http://research.swtch.com/qart
+[qr]: https://code.google.com/p/rsc/source/browse/qr
 [dieforfree]: https://github.com/dieforfree
 [qart4j]: https://github.com/dieforfree/qart4j
 [tutorial]: http://www.thonky.com/qr-code-tutorial/

@@ -1,4 +1,4 @@
-# pyqart - QArt 的  Python 实现
+# PyQArt - QArt 的  Python 实现
 
 [English version]((https://github.com/7sDream/pyqart/blob/master/README.md))
 
@@ -94,7 +94,7 @@ print(StringPrinter.print(painter))
 
 ## 其他实现版本
 
-- Golang: [qr] by [Russ Cox][russ_cos_google_plus]
+- Golang: [qr][qr] by [Russ Cox][russ_cos_google_plus]
 - Java: [qart4j][qart4j] by [dieforfree][dieforfree]
 
 ## 致谢
@@ -112,6 +112,7 @@ MIT。
 
 [russ_cos_google_plus]: https://plus.google.com/+RussCox-rsc
 [qart_article]: http://research.swtch.com/qart
+[qr]: https://code.google.com/p/rsc/source/browse/qr
 [dieforfree]: https://github.com/dieforfree
 [qart4j]: https://github.com/dieforfree/qart4j
 [tutorial]: http://www.thonky.com/qr-code-tutorial/
