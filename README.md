@@ -73,7 +73,7 @@ print(StringPrinter.print(painter))
 
 Then you will see:
 
-![qr in terminal: hello world](http://ww4.sinaimg.cn/large/88e401f0gw1f6dmg4d14bj20ja0dowft.jpg)
+![qr in terminal: hello world](http://ww4.sinaimg.cn/large/88e401f0gw1f6do76nvtyj20d00963zr.jpg)
 
 What you will see depends on your font setting, I'm using Dejavu Sans Mono.
 

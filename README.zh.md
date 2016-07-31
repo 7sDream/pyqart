@@ -73,7 +73,7 @@ print(StringPrinter.print(painter))
 
 输出如下：
 
-![qr in terminal: hello world](http://ww4.sinaimg.cn/large/88e401f0gw1f6dmg4d14bj20ja0dowft.jpg)
+![qr in terminal: hello world](http://ww4.sinaimg.cn/large/88e401f0gw1f6do76nvtyj20d00963zr.jpg)
 
 显示效果和你终端的字体有关，我的字体是 Dejavu Sans Mono.
 
