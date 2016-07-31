@@ -20,7 +20,7 @@ QArt 是由 [Russ Cox][russ_cos_google_plus] 在他个人网站的[一篇文章]
 
 ### qr 部分
 
-```
+```python
 from pyqart import QrArgs, QrPainter, ImagePrinter
 
 # set QrCode arguments
@@ -61,7 +61,7 @@ ImagePrinter.print(
 
 如果你想在终端里查看的话，请使用 StringPrinter：
 
-```
+```python
 from pyqart import QrArgs, QrPainter, StringPrinter
 
 # just like last example

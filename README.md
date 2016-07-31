@@ -20,7 +20,7 @@ For code reues, I split the lib to two part. One for generate normal QrCode, ano
 
 ### The Qr Part
 
-```
+```python
 from pyqart import QrArgs, QrPainter, ImagePrinter
 
 # set QrCode arguments
@@ -61,7 +61,7 @@ Like bellow:
 
 If you want show it in terminal, please use StringPrinter：
 
-```
+```python
 from pyqart import QrArgs, QrPainter, StringPrinter
 
 # just like last example
