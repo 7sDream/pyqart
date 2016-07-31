@@ -85,12 +85,13 @@ I'm working on it.
 
 ## TODO
 
+- [ ] Make QrPainter decided argument by itself.
 - [ ] Art part
 - [ ] CLI
 - [ ] GUI
 - [ ] doc
-- [ ] package
-- [ ] test
+- [ ] Package
+- [ ] Tests
 
 ## Other Implement
 

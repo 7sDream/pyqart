@@ -85,6 +85,7 @@ print(StringPrinter.print(painter))
 
 ## TODO
 
+- [ ] 让 QrPainter 能自己决定参数
 - [ ] Art 部分
 - [ ] CLI
 - [ ] GUI
