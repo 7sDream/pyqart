@@ -1,6 +1,6 @@
 # PyQArt - QArt 的  Python 实现
 
-[English version]((https://github.com/7sDream/pyqart/blob/master/README.md))
+[English version](https://github.com/7sDream/pyqart/blob/master/README.md)
 
 ## 简介
 
@@ -18,7 +18,7 @@ QArt 是由 [Russ Cox][russ_cos_google_plus] 在他个人网站的[一篇文章]
 
 **然而！art 部分我还没实现。但是我觉得 qr 部分已经可用了，先放上来。**
 
-### qr 部分
+### Qr 部分
 
 ```python
 from pyqart import QrArgs, QrPainter, ImagePrinter
@@ -79,7 +79,7 @@ print(StringPrinter.print(painter))
 
 当然 StringPrinter 只能用于显示比较小的二维码。
 
-### art 部分
+### Art 部分
 
 还在编写中。
 
