@@ -14,7 +14,7 @@ And this repo is Python implement of it.
 
 ## Usage
 
-For code reues, I split the lib to two part. One for generate normal QrCode, another is the Art part - mix Qr it with image.
+For code reues, I split the lib to two part. One for generate normal QrCode, another is the Art part - mix QrCode of URL with image.
 
 **BUT! Art part is under construction, now just the Qr part is usable.**
 
