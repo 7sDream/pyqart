@@ -21,7 +21,7 @@ QArt 是由 [Russ Cox][russ_cos_google_plus] 在他个人网站的[一篇文章]
 ### Qr 部分
 
 ```python
-from pyqart import QrData, QrPainter, ImagePrinter
+from pyqart QrImagePrinter
 
 QrImagePrinterQr.print(
     "Hello world!",     # 要编码的数据

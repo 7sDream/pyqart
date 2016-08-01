@@ -21,7 +21,7 @@ For code reues, I split the lib to two part. One for generate normal QrCode, ano
 ### The Qr Part
 
 ```python
-from pyqart import QrData, QrPainter, ImagePrinter
+from pyqart import QrImagePrinter
 
 QrImagePrinterQr.print(
     "Hello world!",     # data
