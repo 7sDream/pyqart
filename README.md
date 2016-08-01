@@ -10,11 +10,11 @@ An Example(come from the article):
 
 ![QArt Example](http://ww4.sinaimg.cn/large/88e401f0gw1f6dl845naoj205g05ga9y.jpg)
 
-And this repo is python implement of it.
+And this repo is Python implement of it.
 
 ## Usage
 
-For code reues, I split the lib to two part. One for generate normal QrCode, another is the Art part - mix it with image.
+For code reues, I split the lib to two part. One for generate normal QrCode, another is the Art part - mix Qr it with image.
 
 **BUT! Art part is under construction, now just the Qr part is usable.**
 
@@ -75,9 +75,9 @@ Then you will see:
 
 ![qr in terminal: hello world](http://ww4.sinaimg.cn/large/88e401f0gw1f6do76nvtyj20d00963zr.jpg)
 
-What you will see depends on your font setting, I'm using Dejavu Sans Mono.
+The actual result you will see depends on your font setting, I'm using Dejavu Sans Mono.
 
-Yes, StringPrinter is useful for only those small QrCode. 
+Yes, StringPrinter is useful for **only small QrCodes**. 
 
 ### The Art Part
 
@@ -100,9 +100,9 @@ I'm working on it.
 
 ## Acknowledgements
 
-- All credit goes to [Russ Cos][russ_cos_google_plus], Thanks for him。
+- All credit goes to [Russ Cos][russ_cos_google_plus], Thanks for his article and implement.
 - Thanks for [qart4j project][qart4j] by [dieforfree][dieforfree]，which helps me so much on how to implement the art part.
-- Thanks to a series of articles named [QR Code Tutorial][tutorial] of thonky.com, Is very detailed. Whenever I faced problem about encoding or error correction, I will go to it for help.
+- Thanks to a series of articles named [QR Code Tutorial][tutorial] in thonky.com, It's very detailed. Whenever I faced problem about encoding or error correction, I will go to it for help.
 - Thanks to the Python programing language。
 
 ## LICENSE
