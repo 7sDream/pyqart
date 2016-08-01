@@ -23,43 +23,26 @@ For code reues, I split the lib to two part. One for generate normal QrCode, ano
 ```python
 from pyqart import QrData, QrPainter, ImagePrinter
 
-# create data set
-data = QrData()
-
-# you can call this several times to add data
-data.put_string("Hello world!")
-
-# give data to a painter to draw them to QrCode
-# version=None means let painter decide size of QrCode by data size
-# mask argument is stand for data mask flag, from 0 to 7
-painter = QrPainter(data, version=None, mask=0)
-
-# printer print painter's painting to a image.
-ImagePrinter.print(painter, "qr.png", 200, 5, (102, 204, 255))
+QrImagePrinterQr.print(
+    "Hello world!",     # data
+    "qr.png",           # file name
+    200,                # QrCode part size by pixel
+    5,                  # QrCode board width by pixel
+    (102, 204, 255),    # front color
+                        # no background color provided, use default(white)
+)
 ```
 
-Then you will get a QrCode image on current directory whose:
-
-- Filename is qr.png.
-- Size of code part is 200x200. 
-- Board width 5 pixels.
-- Background is white(which is the default value).
-- Front color is Tianyi Blue(name of color (102, 204, 255)).
-
-Like bellow:
+Just from one line of code like above, you can get a QrCode image :
 
 ![qr code: hello world][qr_in_image]
 
 If you want show it in terminal, please use StringPrinter：
 
 ```python
-from pyqart import QrArgs, QrPainter, StringPrinter
+from pyqart import QrStringPrinter
 
-# just like last example
-
-# ...
-
-print(StringPrinter.print(painter))
+QrStringPrinter.print("Hello world!")
 ```
 
 Then you will see:

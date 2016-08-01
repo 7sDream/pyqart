@@ -1,3 +1,3 @@
-from .base import BasePrinter
-from .image_printer import ImagePrinter
-from .string_printer import StringPrinter
+from .base import QrBasePrinter
+from .image_printer import QrImagePrinter
+from .string_printer import QrStringPrinter

@@ -23,43 +23,26 @@ QArt 是由 [Russ Cox][russ_cos_google_plus] 在他个人网站的[一篇文章]
 ```python
 from pyqart import QrData, QrPainter, ImagePrinter
 
-# 创建要编码的数据
-data = QrData()
-
-# 你可以多次调用这一方法来添加数据
-data.put_string("Hello world!")
-
-# 将这些数据交给一位画家
-# version=None 将会让画家自己根据数据多少决定二维码大
-# mask 是数据掩码标志，可取范围为 0~7
-painter = QrPainter(data, version=None, mask=0)
-
-# 打印器将画家脑中的二维码输出成图片
-ImagePrinter.print(painter, "qr.png", 200, 5, (102, 204, 255))
+QrImagePrinterQr.print(
+    "Hello world!",     # 要编码的数据
+    "qr.png",           # 输出文件名
+    200,                # 二维码部分的大小（以像素为单位）
+    5,                  # 边框大小（以像素为单位）
+    (102, 204, 255),    # 前景色
+                        # 背景色没有设置，将会使用默认的白色
+)
 ```
 
-你将的在当前目录得到一张:
-
-- 内部大小 200x200
-- 边框宽度 5 像素
-- 背景色为白色
-- 前景色为天依蓝
-- 名为 qr.png
-
-的二维码图片：
+一行代码，你就可以生成出一张二维码图片：
 
 ![qr code: hello world][qr_in_image]
 
 如果你想在终端里查看的话，请使用 StringPrinter：
 
 ```python
-from pyqart import QrArgs, QrPainter, StringPrinter
+from pyqart import QrStringPrinter
 
-# 同上一例子
-
-# ...
-
-print(StringPrinter.print(painter))
+QrStringPrinter.print(painter)
 ```
 
 输出如下：

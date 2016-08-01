@@ -2,9 +2,9 @@ from .qr import (
     QrData,
     QrPainter,
     # ------------
-    BasePrinter,
-    ImagePrinter,
-    StringPrinter,
+    QrBasePrinter,
+    QrImagePrinter,
+    QrStringPrinter,
     # ------------
     QrException,
 )

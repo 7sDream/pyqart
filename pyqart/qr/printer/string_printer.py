@@ -2,7 +2,7 @@
 # Author   : 7sDream
 # Usage    : A printer that print QrCode to a string, can be show in shell.
 
-from .base import BasePrinter
+from .base import QrBasePrinter
 
 WHITE_ALL = '\u2588'
 WHITE_BLACK = '\u2580'
@@ -17,9 +17,16 @@ MAP = {
 }
 
 
-class StringPrinter(BasePrinter):
+class QrStringPrinter(QrBasePrinter):
     @classmethod
-    def print(cls, painter, *args, **kwargs):
+    def print(cls, obj, print_out=True, *args, **kwargs):
+        """
+        :param obj: See :any:`QrImagePrinter`
+        :param bool print_out: Whether to print QrCode out.
+        :return: The string that can be print out like a QrCode.
+        :type: string
+        """
+        painter = cls._create_painter(obj)
         matrix = painter.as_bool_matrix
         matrix = [[False] + x + [False] for x in matrix]
         size = len(matrix) + 2
@@ -32,4 +39,7 @@ class StringPrinter(BasePrinter):
             for col in range(0, size):
                 line.append(MAP[(matrix[row][col], matrix[row + 1][col])])
             lines.append(''.join(line))
-        return '\n'.join(lines)
+        string = '\n'.join(lines)
+        if print_out:
+            print(string)
+        return string

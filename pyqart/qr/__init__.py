@@ -6,5 +6,5 @@ from .data import (
     QrSpaceNotEnoughException
 )
 from .painter import QrPainter, QrCanvasException, QrPainterException
-from .printer import BasePrinter, ImagePrinter, StringPrinter
+from .printer import QrBasePrinter, QrImagePrinter, QrStringPrinter
 from .exception import QrException

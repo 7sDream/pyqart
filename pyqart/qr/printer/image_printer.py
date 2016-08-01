@@ -4,21 +4,24 @@
 
 from io import BytesIO
 
-from .base import BasePrinter
-from ..painter import QrPainter
+from .base import QrBasePrinter
+from ..data import QrData
 
 import PIL.Image as Image
 import PIL.ImageDraw as Draw
 
 
-class ImagePrinter(BasePrinter):
+class QrImagePrinter(QrBasePrinter):
     @classmethod
-    def print(cls, painter, path=None, code_width=None, border_width=None,
+    def print(cls, obj, path=None, code_width=None, border_width=None,
               fcolor=None, bgcolor=None, format='png'):
         """
         Print the QrCode to a image.
 
-        :param QrPainter painter: The painter that want print his/her QrCode.
+        :param QrPainter|QrData|str|bytes|bytearray obj:
+            The painter that want print his/her QrCode,
+            or a raw QrData object which contains data,
+            or just a string or bytes(bytearray) which will used as data.
         :param str path: If provided, will auto save file to the path.
         :param int code_width: Width and Height of code part.
             None will be 1 pixel per point.
@@ -29,7 +32,9 @@ class ImagePrinter(BasePrinter):
         :return: Bytes data of image **Only when file path is not provided**.
         :rtype: bytes|None
         """
-        matrix = painter.as_bool_matrix
+        obj = cls._create_painter(obj)
+
+        matrix = obj.as_bool_matrix
         size = len(matrix)
         code_width = int(code_width) if code_width is not None else size
         border_width = size // 20 if border_width is None else border_width

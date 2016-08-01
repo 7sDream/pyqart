@@ -11,12 +11,15 @@ _BIT_PER_CW = 8
 
 
 class QrData(object):
-    def __init__(self, ec_level=0):
+    def __init__(self, string=None, ec_level=0):
         assert 0 <= ec_level <= 3
         self._data_set = []
         self._ec_level = ec_level
         self._changed = False
         self._last = None
+
+        if string is not None:
+            self.put_string(string)
 
     @property
     def version_used_available(self):
