@@ -13,20 +13,19 @@ import PIL.ImageDraw as Draw
 
 class ImagePrinter(BasePrinter):
     @classmethod
-    def print(cls, painter, code_width=None, border_width=None,
-              fcolor=None, bgcolor=None, format='png',
-              path=None):
+    def print(cls, painter, path=None, code_width=None, border_width=None,
+              fcolor=None, bgcolor=None, format='png'):
         """
         Print the QrCode to a image.
 
         :param QrPainter painter: The painter that want print his/her QrCode.
+        :param str path: If provided, will auto save file to the path.
         :param int code_width: Width and Height of code part.
             None will be 1 pixel per point.
         :param border_width: Border width, None will be code width / 20.
         :param (int, int, int) fcolor: Front color, Default is black.
         :param (int, int, int) bgcolor: Background color, Default is white.
         :param str format: Image suffix, like png, jpeg, bmp, etc.
-        :param str path: If provided, will auto save file to the path.
         :return: Bytes data of image **Only when file path is not provided**.
         :rtype: bytes|None
         """

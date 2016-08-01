@@ -8,7 +8,7 @@ QArt 是由 [Russ Cox][russ_cos_google_plus] 在他个人网站的[一篇文章]
 
 示例图片（来源于 Russ Cox 的文章）：
 
-![QArt Example](http://ww4.sinaimg.cn/large/88e401f0gw1f6dl845naoj205g05ga9y.jpg)
+![QArt Example][qart_example]
 
 这个库是 QArt 的 Python 实现版本。
 
@@ -21,30 +21,21 @@ QArt 是由 [Russ Cox][russ_cos_google_plus] 在他个人网站的[一篇文章]
 ### Qr 部分
 
 ```python
-from pyqart import QrArgs, QrPainter, ImagePrinter
+from pyqart import QrData, QrPainter, ImagePrinter
 
-# set QrCode arguments
-args = QrArgs(
-    1,  # 二维码版本，决定二维码的大小和能存放的最大字节数
-    0,  # 纠错等级，范围 0 - 3
-    0,  # 数据部分掩码， 范围 0 - 7
-)
+# 创建要编码的数据
+data = QrData()
 
-# 创建一个把数据画在二维码上的画家
-painter = QrPainter(args)
+# 你可以多次调用这一方法来添加数据
+data.put_string("Hello world!")
 
-# 给画家一些数据
-painter.put_string("Hello world!")
+# 将这些数据交给一位画家
+# version=None 将会让画家自己根据数据多少决定二维码大
+# mask 是数据掩码标志，可取范围为 0~7
+painter = QrPainter(data, version=None, mask=0)
 
-# 打印机将画出的二维码打印（显示）出来
-ImagePrinter.print(
-    painter,
-    bgcolor=(255, 255, 255),
-    fcolor=(102, 204, 255),
-    code_width=200,
-    border_width=5,
-    path='qr.png'
-)
+# 打印器将画家脑中的二维码输出成图片
+ImagePrinter.print(painter, "qr.png", 200, 5, (102, 204, 255))
 ```
 
 你将的在当前目录得到一张:
@@ -57,14 +48,14 @@ ImagePrinter.print(
 
 的二维码图片：
 
-![qr code: hello world](http://ww4.sinaimg.cn/large/88e401f0gw1f6dmbn4xp6j205u05u0t4.jpg)
+![qr code: hello world][qr_in_image]
 
 如果你想在终端里查看的话，请使用 StringPrinter：
 
 ```python
 from pyqart import QrArgs, QrPainter, StringPrinter
 
-# just like last example
+# 同上一例子
 
 # ...
 
@@ -73,7 +64,7 @@ print(StringPrinter.print(painter))
 
 输出如下：
 
-![qr in terminal: hello world](http://ww4.sinaimg.cn/large/88e401f0gw1f6do76nvtyj20d00963zr.jpg)
+![qr in terminal: hello world][qr_in_terminal]
 
 显示效果和你终端的字体有关，我的字体是 Dejavu Sans Mono.
 
@@ -85,7 +76,7 @@ print(StringPrinter.print(painter))
 
 ## TODO
 
-- [ ] 让 QrPainter 能自己决定参数
+- [x] 让 QrPainter 能自己决定参数
 - [ ] Art 部分
 - [ ] CLI
 - [ ] GUI
@@ -113,6 +104,9 @@ MIT。
 
 [russ_cos_google_plus]: https://plus.google.com/+RussCox-rsc
 [qart_article]: http://research.swtch.com/qart
+[qart_example]: http://ww4.sinaimg.cn/large/88e401f0gw1f6dl845naoj205g05ga9y.jpg
+[qr_in_image]: http://ww4.sinaimg.cn/large/88e401f0gw1f6dmbn4xp6j205u05u0t4.jpg
+[qr_in_terminal]: http://ww3.sinaimg.cn/large/88e401f0gw1f6e95v7ebmj20di099dh7.jpg
 [qr]: https://code.google.com/p/rsc/source/browse/qr
 [dieforfree]: https://github.com/dieforfree
 [qart4j]: https://github.com/dieforfree/qart4j

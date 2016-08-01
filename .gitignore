@@ -1,6 +1,9 @@
 # Pycharm files
 .idea/
 
+# personal test file
+test.py
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
 # Byte-compiled / optimized / DLL files

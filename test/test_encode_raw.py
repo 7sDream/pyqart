@@ -1,6 +1,6 @@
 import unittest
 
-from pyqart.qr.encode.raw import Raw
+from pyqart.qr.data.raw import Raw
 
 
 class TestRaw(unittest.TestCase):

@@ -1,2 +1,2 @@
 from .painter import QrPainter
-from .exception import QrCanvasException, QrSpaceNotEnoughException
+from .exception import QrCanvasException, QrPainterException

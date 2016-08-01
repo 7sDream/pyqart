@@ -5,7 +5,7 @@
 from .level import QrLevel
 from .mask import QrMask
 from .version import QrVersion
-from ..encode import Raw, AlphaNumeric, Numbers
+from ..data import Raw, AlphaNumeric, Numbers
 from ...common import Bits
 
 __all__ = ['QrArgs']

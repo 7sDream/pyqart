@@ -8,7 +8,7 @@ QArt is a method of combining QrCode of an URL with any image, which was submitt
 
 An Example(come from the article):
 
-![QArt Example](http://ww4.sinaimg.cn/large/88e401f0gw1f6dl845naoj205g05ga9y.jpg)
+![QArt Example][qart_example]
 
 And this repo is Python implement of it.
 
@@ -21,43 +21,34 @@ For code reues, I split the lib to two part. One for generate normal QrCode, ano
 ### The Qr Part
 
 ```python
-from pyqart import QrArgs, QrPainter, ImagePrinter
+from pyqart import QrData, QrPainter, ImagePrinter
 
-# set QrCode arguments
-args = QrArgs(
-    1,  # version, which decide the size, max data bis, etc of the QrCode
-    0,  # error correction level, 0 to 3,
-    0,  # data mask, from 0 to 7
-)
+# create data set
+data = QrData()
 
-# create a painter to draw QrCode from data
-painter = QrPainter(args)
+# you can call this several times to add data
+data.put_string("Hello world!")
 
-# give painter some data
-painter.put_string("Hello world!")
+# give data to a painter to draw them to QrCode
+# version=None means let painter decide size of QrCode by data size
+# mask argument is stand for data mask flag, from 0 to 7
+painter = QrPainter(data, version=None, mask=0)
 
-# printer print QrCode to image
-ImagePrinter.print(
-    painter,
-    bgcolor=(255, 255, 255),
-    fcolor=(102, 204, 255),
-    code_width=200,
-    border_width=5,
-    path='qr.png'
-)
+# printer print painter's painting to a image.
+ImagePrinter.print(painter, "qr.png", 200, 5, (102, 204, 255))
 ```
 
 Then you will get a QrCode image on current directory whose:
 
+- Filename is qr.png.
 - Size of code part is 200x200. 
 - Board width 5 pixels.
-- Background is white(255, 255, 255).
+- Background is white(which is the default value).
 - Front color is Tianyi Blue(name of color (102, 204, 255)).
-- Filename is qr.png.
 
 Like bellow:
 
-![qr code: hello world](http://ww4.sinaimg.cn/large/88e401f0gw1f6dmbn4xp6j205u05u0t4.jpg)
+![qr code: hello world][qr_in_image]
 
 If you want show it in terminal, please use StringPrinter：
 
@@ -73,7 +64,7 @@ print(StringPrinter.print(painter))
 
 Then you will see:
 
-![qr in terminal: hello world](http://ww4.sinaimg.cn/large/88e401f0gw1f6do76nvtyj20d00963zr.jpg)
+![qr in terminal: hello world][qr_in_terminal]
 
 The actual result you will see depends on your font setting, I'm using Dejavu Sans Mono.
 
@@ -85,7 +76,7 @@ I'm working on it.
 
 ## TODO
 
-- [ ] Make QrPainter decided argument by itself.
+- [x] Make QrPainter decided argument by itself.
 - [ ] Art part
 - [ ] CLI
 - [ ] GUI
@@ -113,6 +104,9 @@ See LICENSE.
 
 [russ_cos_google_plus]: https://plus.google.com/+RussCox-rsc
 [qart_article]: http://research.swtch.com/qart
+[qart_example]: http://ww4.sinaimg.cn/large/88e401f0gw1f6dl845naoj205g05ga9y.jpg
+[qr_in_image]: http://ww4.sinaimg.cn/large/88e401f0gw1f6dmbn4xp6j205u05u0t4.jpg
+[qr_in_terminal]: http://ww3.sinaimg.cn/large/88e401f0gw1f6e95v7ebmj20di099dh7.jpg
 [qr]: https://code.google.com/p/rsc/source/browse/qr
 [dieforfree]: https://github.com/dieforfree
 [qart4j]: https://github.com/dieforfree/qart4j

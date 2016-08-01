@@ -1,6 +1,6 @@
 import unittest
 
-from pyqart.qr.encode.numbers import Numbers
+from pyqart.qr.data.numbers import Numbers
 
 
 class TestNumbers(unittest.TestCase):

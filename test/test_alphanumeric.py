@@ -1,6 +1,6 @@
 import unittest
 
-from pyqart.qr.encode.alphanumeric import AlphaNumeric
+from pyqart.qr.data.alphanumeric import AlphaNumeric
 
 
 class TestAlphaNumeric(unittest.TestCase):
