@@ -55,7 +55,7 @@ Yes, StringPrinter is useful for **only small QrCodes**.
 
 ### The Art Part
 
-I'm working on it.
+Finished, I'm designing appropriate interface parameters.
 
 ## TODO
 
@@ -63,8 +63,9 @@ I'm working on it.
 - [x] Art part
 - [ ] CLI
 - [ ] GUI
-- [ ] doc
 - [ ] Package
+- [ ] Use Cython to accelerate Reed-Solomon error correction
+- [ ] Docs
 - [ ] Tests
 
 ## Other Implement

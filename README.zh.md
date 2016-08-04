@@ -21,7 +21,7 @@ QArt 是由 [Russ Cox][russ_cos_google_plus] 在他个人网站的[一篇文章]
 ### Qr 部分
 
 ```python
-from pyqart QrImagePrinter
+from pyqart import QrImagePrinter
 
 QrImagePrinterQr.print(
     "Hello world!",     # 要编码的数据
@@ -55,7 +55,7 @@ QrStringPrinter.print(painter)
 
 ### Art 部分
 
-还在编写中。
+已完成，正在设计合适的接口。
 
 ## TODO
 
@@ -63,8 +63,9 @@ QrStringPrinter.print(painter)
 - [x] Art 部分
 - [ ] CLI
 - [ ] GUI
-- [ ] 文档
 - [ ] 打包
+- [ ] 使用 Cython 加快里德所罗门码编码速度
+- [ ] 文档
 - [ ] 测试
 
 ## 其他实现版本
