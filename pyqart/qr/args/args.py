@@ -2,9 +2,9 @@
 # Author   : 7sDream
 # Usage    : All needed args to create a empty qr code.
 
-from .level import QrLevel
 from .mask import QrMask
 from .version import QrVersion
+from .rotation import QrRotation
 from ..data import Raw, AlphaNumeric, Numbers
 from ...common import Bits
 
@@ -86,10 +86,12 @@ if version <= first_item, cci_length is second_item.
 
 
 class QrArgs(object):
-    def __init__(self, version, level, mask):
+    def __init__(self, version, level=0, mask=0, rotation=0):
+        assert 0 <= level <= 3, "Level must between 0 and 3."
         self._version = QrVersion(version)
-        self._level = QrLevel(level)
         self._mask = QrMask(mask)
+        self._level = level
+        self._rotation = QrRotation(rotation)
 
     @property
     def size(self):
@@ -98,6 +100,10 @@ class QrArgs(object):
         :rtype: int
         """
         return self._version.size
+
+    @property
+    def rotate_func(self):
+        return self._rotation.rotate_func
 
     @property
     def align_start(self):
@@ -132,12 +138,12 @@ class QrArgs(object):
         return self._version.number
 
     @property
-    def level_index(self):
+    def level(self):
         """
         :return: See :any:`QrLevel.index`.
         :rtype: int
         """
-        return self._level.index
+        return self._level
 
     @property
     def mask_index(self):
@@ -180,7 +186,7 @@ class QrArgs(object):
         :rtype: Bits
         """
         # level
-        bits = Bits(self.level_index ^ 0b01, 2)
+        bits = Bits(self.level ^ 0b01, 2)
         # mask
         bits.append(self.mask_index, 3)
         # ec
@@ -201,7 +207,7 @@ class QrArgs(object):
         :return: Block count.
         :rtype: int
         """
-        return _BC_ECCWCPB_TABLE[self.version_number - 1][self.level_index][0]
+        return _BC_ECCWCPB_TABLE[self.version_number - 1][self.level][0]
 
     @property
     def eccwcpb(self):
@@ -209,7 +215,7 @@ class QrArgs(object):
         :return: Error Correction CodeWord Count Per Block.
         :return: int
         """
-        return _BC_ECCWCPB_TABLE[self.version_number - 1][self.level_index][1]
+        return _BC_ECCWCPB_TABLE[self.version_number - 1][self.level][1]
 
     @property
     def cwc(self):

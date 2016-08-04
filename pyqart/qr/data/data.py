@@ -6,20 +6,29 @@ from .raw import Raw
 from .alphanumeric import AlphaNumeric
 from .numbers import Numbers
 from .exception import QrSpaceNotEnoughException
-
-_BIT_PER_CW = 8
+from ...common import BIT_PER_CW
 
 
 class QrData(object):
     def __init__(self, string=None, ec_level=0):
+        from ..args import QrArgs
+        assert isinstance(string, str)
         assert 0 <= ec_level <= 3
         self._data_set = []
         self._ec_level = ec_level
         self._changed = False
-        self._last = None
+        self._last = (1, QrArgs(1).dcwc * BIT_PER_CW, 0)
 
         if string is not None:
             self.put_string(string)
+
+    @property
+    def size(self):
+        """
+        :return: How many data item in object.
+        :rtype: int
+        """
+        return len(self._data_set)
 
     @property
     def version_used_available(self):
@@ -28,18 +37,18 @@ class QrData(object):
             args = None
             used = 0
             for i in range(1, 41):
-                args = QrArgs(i, self._ec_level, 0)
+                args = QrArgs(i, self._ec_level)
                 encode_list = [cls(data, args.cci_length_of(cls))
                                for cls, data in self._data_set]
                 used = sum([x.needed_space for x in encode_list])
-                available = args.dcwc * _BIT_PER_CW - used
+                available = args.dcwc * BIT_PER_CW - used
                 if available >= 0:
-                    self._last = (args.version_number, used, available)
+                    self._last = (i, available, used)
                     self._changed = False
                     break
             else:
                 raise QrSpaceNotEnoughException(
-                    args.dcwc * _BIT_PER_CW, used
+                    args.dcwc * BIT_PER_CW, used
                 )
         return self._last
 

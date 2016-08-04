@@ -43,7 +43,7 @@ _CODEWORD_COUNT_TABLE = [
 
 class QrVersion(object):
     def __init__(self, version_number):
-        assert 1 <= version_number <= 40
+        assert 1 <= version_number <= 40, "Version must between 1 and 40."
         self._num = version_number
 
     @property

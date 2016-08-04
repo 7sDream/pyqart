@@ -17,6 +17,7 @@ class BaseType(object):
         :param data: Data to be encoded
         :param int cci_length: value_upper of Char Count Indicator in bit
         """
+        assert len(data) > 0, 'Unable to encode empty data.'
         self._data = data
         self._cci_length = cci_length
         self._validate()

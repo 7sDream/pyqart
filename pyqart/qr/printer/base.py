@@ -15,7 +15,10 @@ class QrBasePrinter(object):
 
     @classmethod
     def _create_painter(cls, obj):
-        assert isinstance(obj, (QrPainter, QrData, str, bytes, bytearray))
+        assert isinstance(
+            obj,
+            (QrPainter, QrData, str, bytes, bytearray)
+        ), "Argument must be QrPainter, QrData, str, bytes or bytearray object."
         if isinstance(obj, QrData):
             obj = QrPainter(obj)
         elif isinstance(obj, str):
@@ -26,7 +29,6 @@ class QrBasePrinter(object):
             obj = QrPainter(obj)
         return obj
 
-    @classmethod
     @abc.abstractmethod
-    def print(cls, painter, *args, **kwargs):
+    def print(self, *args, **kwargs):
         pass

@@ -26,7 +26,7 @@ from pyqart import QrImagePrinter
 QrImagePrinterQr.print(
     "Hello world!",     # data
     "qr.png",           # file name
-    200,                # QrCode part size by pixel
+    2,                  # size of every "Point" of QrCode, by pixel
     5,                  # QrCode board width by pixel
     (102, 204, 255),    # front color
                         # no background color provided, use default(white)
@@ -60,7 +60,7 @@ I'm working on it.
 ## TODO
 
 - [x] Make QrPainter decided argument by itself.
-- [ ] Art part
+- [x] Art part
 - [ ] CLI
 - [ ] GUI
 - [ ] doc

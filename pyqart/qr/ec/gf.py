@@ -6,6 +6,9 @@ from ...common import bit_at
 
 __all__ = ['GF28']
 
+_MUL_CACHE = {}
+_ADD_CACHE = {}
+
 
 class _GF2M(object):
     def __init__(self, m, px):
@@ -68,17 +71,27 @@ class _GFItem(object):
         return self._value
 
     def __add__(self, other):
-        assert self.gf is other.gf
-        value = self._value ^ other.value
-        if value == 0:
-            return None
-        return _GFItem(self.gf, self.gf.index(value), value)
+        cache_index = (self.gf, self.index, other.index)
+        if cache_index not in _ADD_CACHE:
+            value = self._value ^ other.value
+            if value == 0:
+                return None
+            item = _GFItem(self.gf, self.gf.index(value), value)
+            _ADD_CACHE[cache_index] = item
+        else:
+            item = _ADD_CACHE[cache_index]
+        return item
 
     def __mul__(self, other):
-        assert self.gf is other.gf
-        index = self.index + other.index
-        index = index % self.gf.value_upper + int(index // self.gf.value_upper)
-        return self.gf[index]
+        cache_index = (self.gf, self.index, other.index)
+        if cache_index not in _MUL_CACHE:
+            index = self.index + other.index
+            index = index % self.gf.value_upper + int(index // self.gf.value_upper)
+            item = self.gf[index]
+            _MUL_CACHE[cache_index] = item
+        else:
+            item = _MUL_CACHE[cache_index]
+        return item
 
     def __str__(self):
         return "a" + str(self.index)

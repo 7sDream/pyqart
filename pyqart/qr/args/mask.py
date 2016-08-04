@@ -26,7 +26,7 @@ The mask function table.
 
 class QrMask(object):
     def __init__(self, mask_index):
-        assert 0 <= mask_index <= 7
+        assert 0 <= mask_index <= 7, "Mask must between 0 and 7"
         self._index = mask_index
 
     @property

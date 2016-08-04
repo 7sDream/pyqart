@@ -1,0 +1,1 @@
+from .qart import QArtist

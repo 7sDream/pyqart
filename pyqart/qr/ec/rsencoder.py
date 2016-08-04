@@ -19,18 +19,24 @@ RSGenPolynomials = _RSGenPolynomials()
 
 class RSEncoder(object):
     @classmethod
-    def encode(cls, data_bits, ec_length):
+    def encode(cls, data, ec_length, need_bits=True):
         assert ec_length >= 0
         if ec_length == 0:
             return Bits()
-        data_value_list = data_bits.as_int_list
-        data_length = len(data_value_list)
+        if not isinstance(data, list):
+            data = data.as_int_list
+        data_length = len(data)
         all_length = ec_length + data_length
         m = GF28Poly.from_value_list(
-            data_value_list + [0] * ec_length,
+            data + [0] * ec_length,
             all_length - 1
         )
         g = RSGenPolynomials[ec_length]
         r = m % g
-        ec_bits = Bits.copy_from(bytearray(r.as_int_list))
-        return ec_bits
+        res = r.as_int_list
+        if len(res) < ec_length:
+            res = [0] * (ec_length - len(res)) + res
+        if need_bits:
+            return Bits.copy_from(bytearray(res))
+        else:
+            return res

@@ -9,6 +9,9 @@ class TestBitUtils(unittest.TestCase):
         self.assertEqual(one_at(3), 0b00010000)
         self.assertEqual(one_at(4), 0b00001000)
         self.assertEqual(one_at(7), 0b00000001)
+        self.assertEqual(one_at(0, 12), 0b100000000000)
+        self.assertEqual(one_at(5, 10), 0b0000010000)
+        self.assertEqual(one_at(8, 10), 0b0000000010)
 
     def test_one_at_fail(self):
         with self.assertRaises(AssertionError):
@@ -18,13 +21,18 @@ class TestBitUtils(unittest.TestCase):
         with self.assertRaises(AssertionError):
             one_at(8)
         with self.assertRaises(AssertionError):
-            one_at(10)
+            one_at(10, 8)
+        with self.assertRaises(AssertionError):
+            one_at(10, 9)
 
     def test_zero_at_normal(self):
         self.assertEqual(zero_at(0), 0b01111111)
         self.assertEqual(zero_at(3), 0b11101111)
         self.assertEqual(zero_at(4), 0b11110111)
         self.assertEqual(zero_at(7), 0b11111110)
+        self.assertEqual(zero_at(10, 12), 0b111111111101)
+        self.assertEqual(zero_at(0, 12), 0b011111111111)
+        self.assertEqual(zero_at(7, 8), 0b11111110)
 
     def test_zero_at_fail(self):
         with self.assertRaises(AssertionError):
@@ -35,6 +43,10 @@ class TestBitUtils(unittest.TestCase):
             zero_at(8)
         with self.assertRaises(AssertionError):
             zero_at(10)
+        with self.assertRaises(AssertionError):
+            zero_at(10, 9)
+        with self.assertRaises(AssertionError):
+            zero_at(10, 10)
 
     def test_set_bit_normal(self):
         self.assertEqual(set_bit(0b01001010, 2, True), 0b01101010)

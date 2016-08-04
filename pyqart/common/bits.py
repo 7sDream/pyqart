@@ -6,7 +6,12 @@ from .bit_funcs import set_bit, bit_at
 
 __all__ = ['Bits']
 
-_BIT_PER_BYTE = 8
+_BIT_PER_BYTE = _BIT_PER_CW = 8
+
+_PADDING_BITS = 0b1110110000010001
+"""
+padding with those data when data not fill data codewords.
+"""
 
 
 class Bits(object):
@@ -135,11 +140,25 @@ class Bits(object):
         other_end = other.length if count is None else (other_start + count)
         my_end = min(self.length, my_end)
         other_end = min(other.length, other_end)
-        added_count = 0
+        count = 0
         for i, j in zip(range(my_start, my_end), range(other_start, other_end)):
             self[i] = self[i] ^ other[j]
-            added_count += 1
-        return added_count
+            count += 1
+        return count
+
+    def pad(self, available, used):
+        # add terminator
+        self.append(0, min(available, 4))
+
+        # add more 0s to make last several data to a codeword
+        if self.length % _BIT_PER_CW != 0:
+            self.append(0, _BIT_PER_CW - self.length % _BIT_PER_CW)
+
+        # add pad bytes if the data is still not fill all data codewords
+        available = available + used - self.length
+        while available > 0:
+            self.append(_PADDING_BITS, min(available, 16))
+            available -= 16
 
     def _expand_capacity(self, target):
         """

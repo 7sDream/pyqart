@@ -13,8 +13,8 @@ import PIL.ImageDraw as Draw
 
 class QrImagePrinter(QrBasePrinter):
     @classmethod
-    def print(cls, obj, path=None, code_width=None, border_width=None,
-              fcolor=None, bgcolor=None, format='png'):
+    def print(cls, obj, path=None, point_width=None, border_width=None,
+              f_color=None, bg_color=None, format='png'):
         """
         Print the QrCode to a image.
 
@@ -23,11 +23,11 @@ class QrImagePrinter(QrBasePrinter):
             or a raw QrData object which contains data,
             or just a string or bytes(bytearray) which will used as data.
         :param str path: If provided, will auto save file to the path.
-        :param int code_width: Width and Height of code part.
+        :param int point_width: Width and Height of code part.
             None will be 1 pixel per point.
         :param border_width: Border width, None will be code width / 20.
-        :param (int, int, int) fcolor: Front color, Default is black.
-        :param (int, int, int) bgcolor: Background color, Default is white.
+        :param (int, int, int) f_color: Front color, Default is black.
+        :param (int, int, int) bg_color: Background color, Default is white.
         :param str format: Image suffix, like png, jpeg, bmp, etc.
         :return: Bytes data of image **Only when file path is not provided**.
         :rtype: bytes|None
@@ -36,30 +36,31 @@ class QrImagePrinter(QrBasePrinter):
 
         matrix = obj.as_bool_matrix
         size = len(matrix)
-        code_width = int(code_width) if code_width is not None else size
+        point_width = int(point_width) if point_width is not None else 1
         border_width = size // 20 if border_width is None else border_width
         border_width = max(1, border_width)
+        code_width = size * point_width
         img_size = code_width + 2 * border_width
 
-        fcolor = (0, 0, 0) if fcolor is None else fcolor
-        bgcolor = (255, 255, 255) if bgcolor is None else bgcolor
+        f_color = (0, 0, 0) if f_color is None else f_color
+        bg_color = (255, 255, 255) if bg_color is None else bg_color
 
-        qrImg = Image.new('RGB', (size, size), bgcolor)
-        drawer = Draw.Draw(qrImg)
+        qr_img = Image.new('RGB', (size, size), bg_color)
+        drawer = Draw.Draw(qr_img)
 
-        fpoints = []
+        fill_points = []
         for y in range(size):
             for x in range(size):
                 if matrix[y][x]:
-                    fpoints.append((x, y))
+                    fill_points.append((x, y))
 
-        drawer.point(fpoints, fcolor)
+        drawer.point(fill_points, f_color)
         del drawer
 
-        qrImg = qrImg.resize((code_width, code_width))
+        qr_img = qr_img.resize((code_width, code_width))
 
-        img = Image.new('RGB', (img_size, img_size), bgcolor)
-        img.paste(qrImg, (border_width, border_width))
+        img = Image.new('RGB', (img_size, img_size), bg_color)
+        img.paste(qr_img, (border_width, border_width))
 
         if path is not None:
             img.save(path, format=format)

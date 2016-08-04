@@ -17,17 +17,14 @@ class _GFPoly(object):
         pass
 
     def __init__(self, pcmap):
-        self._pcmap = {}
-        temp_max = 0
-        for p, c in pcmap.items():
-            assert c.gf is self.gf()
-            self._pcmap[p] = c
-            temp_max = max(temp_max, p)
-        self._max_index = temp_max
+        self._pcmap = pcmap
+        if self._pcmap:
+            self._max_index = max(self._pcmap.keys())
+        else:
+            self._max_index = 0
 
     @classmethod
     def from_index_list(cls, ilist, maxp):
-        assert len(ilist) > 0 and maxp >= 0
         pcmap = {}
         for xi, ai in enumerate(ilist):
             if ai is None:
@@ -37,7 +34,6 @@ class _GFPoly(object):
 
     @classmethod
     def from_value_list(cls, vlist, maxp):
-        assert len(vlist) > 0 and maxp >= 0
         pcmap = {}
         for i, v in enumerate(vlist):
             if v == 0:

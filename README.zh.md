@@ -26,7 +26,7 @@ from pyqart QrImagePrinter
 QrImagePrinterQr.print(
     "Hello world!",     # 要编码的数据
     "qr.png",           # 输出文件名
-    200,                # 二维码部分的大小（以像素为单位）
+    2,                  # 二维码图片中「点」的大小（以像素为单位）
     5,                  # 边框大小（以像素为单位）
     (102, 204, 255),    # 前景色
                         # 背景色没有设置，将会使用默认的白色
@@ -60,7 +60,7 @@ QrStringPrinter.print(painter)
 ## TODO
 
 - [x] 让 QrPainter 能自己决定参数
-- [ ] Art 部分
+- [x] Art 部分
 - [ ] CLI
 - [ ] GUI
 - [ ] 文档

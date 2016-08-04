@@ -8,33 +8,36 @@ import functools
 __all__ = ['bit_at', 'one_at', 'zero_at', 'set_bit']
 
 
-@functools.lru_cache(maxsize=8)
-def one_at(pos):
+@functools.lru_cache()
+def one_at(pos, size=8):
     """
-    Create a 8-bit int which only has one '1' bit at specific position.
+    Create a size-bit int which only has one '1' bit at specific position.
 
     example:
 
     one_at(0) -> 0b10000000
     one_at(3) -> 0b00010000
+    one_at(5, 10) -> 0b0000010000
 
-    :param int pos: position of '1' bit.
+    :param int pos: Position of '1' bit.
+    :param int size: Length of value by bit.
     :rtype: int
     """
-    assert 0 <= pos < 8
-    return 1 << (7 - pos)
+    assert 0 <= pos < size
+    return 1 << (size - 1 - pos)
 
 
-@functools.lru_cache(maxsize=8)
-def zero_at(pos):
+@functools.lru_cache()
+def zero_at(pos, size=8):
     """
-    Create a 8-bit int which only has one '0' bit at specific position.
+    Create a size-bit int which only has one '0' bit at specific position.
 
-    :param int pos: position of '0' bit.
+    :param int pos: Position of '0' bit.
+    :param int size: Length of value by bit.
     :rtype: int
     """
-    assert 0 <= pos < 8
-    return (~one_at(pos)) & 0xFF
+    assert 0 <= pos < size
+    return 2**size - 2**(size - pos - 1) - 1
 
 
 def set_bit(value, pos, bit):
@@ -67,4 +70,6 @@ def bit_at(value, length, pos):
 
     assert length > 0
     assert 0 <= pos < length
+    if value == 0:
+        return False
     return ((value >> (length - 1 - pos)) & one_at(7)) == 1

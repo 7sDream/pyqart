@@ -30,7 +30,7 @@ _BIT_PER_CW = 8
 
 class QrCanvas(object):
     def __init__(self, args):
-        assert isinstance(args, QrArgs)
+        assert isinstance(args, QrArgs), "args argument must be QrArgs object."
         self._args = args
         self._size = self.args.size
         self._points = [
@@ -45,6 +45,7 @@ class QrCanvas(object):
         self._add_format_pattern()
         self._data_ec_points = self._add_empty_data_ec()
         self._add_mask()
+        self._rotate()
 
     def _add_timing_pattern(self):
         """
@@ -305,6 +306,16 @@ class QrCanvas(object):
             self._points[y + 5][x + 5].type
         }
 
+    def _rotate(self):
+        if self.args.rotate_func is None:
+            return
+        new = [[None for _ in range(self.size)] for __ in range(self.size)]
+        for y in range(self.size):
+            for x in range(self.size):
+                new_y, new_x = self.args.rotate_func(y, x, self.size)
+                new[new_y][new_x] = self.points[y][x]
+        self._points = new
+
     @property
     def args(self):
         return self._args
@@ -312,6 +323,10 @@ class QrCanvas(object):
     @property
     def size(self):
         return self._size
+
+    @property
+    def data_ec_points(self):
+        return self._data_ec_points
 
     def load_data(self, bits):
         data_ec_length = len(self._data_ec_points) - 7
