@@ -8,3 +8,7 @@ from .qr import (
     # ------------
     QrException,
 )
+
+from .art import QArtist
+
+__version__ = '0.0.1'

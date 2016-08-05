@@ -20,12 +20,16 @@ def _copy(i):
 
 def _create_vs(dbc, ecbc):
     if dbc not in _VS_CACHE:
+        print('can\'t find in cache, calculating...', end='', flush=True)
         vs = []
         for i in range(dbc):
             b = [0] * (i // 8) + [one_at(i % 8)] + [0] * (dbc // 8 - i // 8 - 1)
             b += RSEncoder.encode(b, ecbc // BIT_PER_CW, False)
             vs.append(b)
+        print('Done')
         _VS_CACHE[dbc] = vs
+    else:
+        print('found in cache.')
     return _copy(dbc)
 
 

@@ -14,7 +14,7 @@ import PIL.ImageDraw as Draw
 class QrImagePrinter(QrBasePrinter):
     @classmethod
     def print(cls, obj, path=None, point_width=None, border_width=None,
-              f_color=None, bg_color=None, format='png'):
+              f_color=None, bg_color=None, format=None):
         """
         Print the QrCode to a image.
 
@@ -37,7 +37,7 @@ class QrImagePrinter(QrBasePrinter):
         matrix = obj.as_bool_matrix
         size = len(matrix)
         point_width = int(point_width) if point_width is not None else 1
-        border_width = size // 20 if border_width is None else border_width
+        border_width = point_width if border_width is None else border_width
         border_width = max(1, border_width)
         code_width = size * point_width
         img_size = code_width + 2 * border_width
@@ -67,5 +67,5 @@ class QrImagePrinter(QrBasePrinter):
             return None
 
         f = BytesIO()
-        img.save(f, format=format)
+        img.save(f, format=format if format is not None else 'png')
         return f.getvalue()

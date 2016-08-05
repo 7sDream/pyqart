@@ -21,12 +21,14 @@ class QArtist(QrPainter):
         assert isinstance(img, (str, QArtSourceImage))
         if isinstance(img, str):
             img = QArtSourceImage(img)
+        self._only_data = bool(only_data)
         data = QrData(url + '#', level)
         super().__init__(data, version, mask, rotation)
         args, _, _ = self.get_params()
+        print('Processing input image...', end='', flush=True)
         self._targets = img.to_targets(self.canvas, args, bool(dither),
                                        rand, dy, dx)
-        self._only_data = bool(only_data)
+        print('Done.')
 
     @property
     def bits(self):
@@ -79,6 +81,9 @@ class QArtist(QrPainter):
                         eci += ecbc
                         continue
 
+                print('Create BitBlock', '{i}/{bc}...'.format(
+                    i=i+1, bc=args.bc,
+                ), end='', flush=True)
                 block = BitBlock(bits, di, dbc, eci, ecbc)
 
                 # Lock uncontrollable bits
@@ -150,6 +155,10 @@ class QArtist(QrPainter):
                     value -= 8
                 numbers += str(value).rjust(count // 3, '0')
 
+            print('Error count', error_count, end='')
             if error_count == 0:
+                print(', send to printer.')
                 data_bits.extend(ec_bits)
                 return data_bits
+            else:
+                print(', restart.')
