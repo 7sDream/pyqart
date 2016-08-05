@@ -14,14 +14,18 @@ from ..common import Bits, BIT_PER_CW
 
 __all__ = ['QArtist']
 
+INF = float('inf')
+
 
 class QArtist(QrPainter):
     def __init__(self, url, img, version=None, mask=None, level=0, rotation=0,
-                 dither=False, only_data=False, rand=False, dy=None, dx=None):
+                 dither=False, only_data=False, rand=False, higher_first=False,
+                 dy=None, dx=None):
         assert isinstance(img, (str, QArtSourceImage))
         if isinstance(img, str):
             img = QArtSourceImage(img)
         self._only_data = bool(only_data)
+        self._higher_first = bool(higher_first)
         data = QrData(url + '#', level)
         super().__init__(data, version, mask, rotation)
         args, _, _ = self.get_params()
@@ -97,11 +101,15 @@ class QArtist(QrPainter):
                 def compare(x):
                     t = self._targets[x]
                     if t.is_hard_zero():
-                        return -1
+                        if self._higher_first:
+                            return INF
+                        else:
+                            return -1
                     else:
                         return t.contrast
 
-                targets_index = sorted(targets_index, key=compare)
+                targets_index = sorted(targets_index, key=compare,
+                                       reverse=self._higher_first)
 
                 for target_index in targets_index:
                     target = self._targets[target_index]

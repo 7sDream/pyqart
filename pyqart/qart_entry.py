@@ -39,8 +39,13 @@ def main():
     )
     parser.add_argument(
         '-n', '--rand', action="store_true",
-        help="random pick point to approach the target image, "
-             "if not provide, will use pixel from low contrast region first",
+        help="generate point contrast by random, "
+             "if not provide, will use pixel nearby to calculate contrast",
+    )
+    parser.add_argument(
+        '-f', '--higher-first', action='store_true',
+        help="pick pixel from higher contrast region first, "
+             "default will pick from lower region first"
     )
     parser.add_argument(
         '-x', '--yx', type=int, nargs=2,
