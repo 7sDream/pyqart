@@ -81,7 +81,7 @@ pyqart -n -c 102 204 255 -v 8 "http://0v0.link/" photo.jpg -o qart-n.png
 
 ![][my-qart-n-img]
 
-可能还是不太好？再试试 `-y` 参数通过放弃边缘区域来加强中间区域的逼近效果，：
+可能还是不太好？再试试 `-y` 参数，它通过放弃边缘区域来加强中间区域的逼近效果：
 
 ```bash
 pyqart -y -c 102 204 255 -v 8 "http://0v0.link/" photo.jpg -o qart-y.png
@@ -90,6 +90,12 @@ pyqart -y -c 102 204 255 -v 8 "http://0v0.link/" photo.jpg -o qart-y.png
 ![][my-qart-y-img]
 
 `-y` 和 `-n` 参数也可以结合起来使用，不过提升不会很明显。
+
+**注意： `-y` 参数由于只只使用数据块而不使用纠错块，减少了很多很多很多操作，相比没有 `-y` 参数大概有 30 到 100 倍的速度提升，强烈建议在不需要全图拟合时使用 `-y` 参数。**
+
+另外，使用 `-r` 参数指定二维码的旋转角度，可以把可控制的数据区变为横向，方便扁长图形处理：
+
+![][my-pyqart-y-r-img]
 
 有关 QArt 生成的更多参数和它们的作用请使用 `pyqart -h` 命令查看。
 
@@ -101,7 +107,7 @@ pyqart -y -c 102 204 255 -v 8 "http://0v0.link/" photo.jpg -o qart-y.png
 
 ![][python-qr]
 
-Python 官网。
+Python 官网。(此示例使用了 -d 参数，请查看帮助获取更多信息)
 
 ![][github-qr]
 
@@ -149,6 +155,7 @@ MIT。
 [my-qart-img]: http://ww3.sinaimg.cn/large/88e401f0gw1f6ir8t0mbej20490490t2.jpg
 [my-qart-n-img]: http://ww1.sinaimg.cn/large/88e401f0gw1f6irh15ouuj2049049mxp.jpg
 [my-qart-y-img]: http://ww2.sinaimg.cn/large/88e401f0gw1f6irbnfjozj20490490t4.jpg
+[my-pyqart-y-r-img]: http://ww3.sinaimg.cn/large/88e401f0gw1f6jd7w10r7j205l05lt91.jpg
 [qr]: https://code.google.com/p/rsc/source/browse/qr
 [dieforfree]: https://github.com/dieforfree
 [qart4j]: https://github.com/dieforfree/qart4j

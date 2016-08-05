@@ -87,6 +87,12 @@ Still not satisfied? Use `-y` option to enhance the accuracy of the central regi
 
 `-y` and `-n` can be used at the same time, but no obvious improvement.
 
+**Note： because that `-y` option will only use data block, ignore error correction block，it reduce many many many calculate. It has about 30x to 100x speed up compare with no `-y` option case. So I strongly recommend using `-y` option whenever you needn't make a full picture fitting.**
+
+Use `-r` option to set rotation degree, The controllable data region can be changed into a horizontal area, it will make it easier to process very wide picture.
+
+![][my-pyqart-y-r-img]
+
 Run `pyqart -h` for more options and their effect.
 
 ### Use it in your codes as a module
@@ -97,7 +103,7 @@ Documentation is in preparation.
 
 ![][python-qr]
 
-python.org
+python.org(used -d option, means dithering, see help message for more info.)
 
 ![][github-qr]
 
@@ -145,6 +151,7 @@ See LICENSE.
 [my-qart-img]: http://ww3.sinaimg.cn/large/88e401f0gw1f6ir8t0mbej20490490t2.jpg
 [my-qart-n-img]: http://ww1.sinaimg.cn/large/88e401f0gw1f6irh15ouuj2049049mxp.jpg
 [my-qart-y-img]: http://ww2.sinaimg.cn/large/88e401f0gw1f6irbnfjozj20490490t4.jpg
+[my-pyqart-y-r-img]: http://ww3.sinaimg.cn/large/88e401f0gw1f6jd7w10r7j205l05lt91.jpg
 [qr]: https://code.google.com/p/rsc/source/browse/qr
 [dieforfree]: https://github.com/dieforfree
 [qart4j]: https://github.com/dieforfree/qart4j
