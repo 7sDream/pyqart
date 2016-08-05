@@ -10,6 +10,7 @@ from .bitblock import BitBlock
 from ..qr import QrData, QrPainter
 from ..qr.data.numbers import Numbers
 from ..qr.painter.point import QrPointType
+from ..qr.ec import RSEncoder
 from ..common import Bits, BIT_PER_CW
 
 __all__ = ['QArtist']
@@ -85,14 +86,24 @@ class QArtist(QrPainter):
                         eci += ecbc
                         continue
 
-                print('Create BitBlock', '{i}/{bc}...'.format(
-                    i=i+1, bc=args.bc,
-                ), end='', flush=True)
-                block = BitBlock(bits, di, dbc, eci, ecbc)
+                if not self._only_data:
+                    print('Create BitBlock', '{i}/{bc}...'.format(
+                        i=i+1, bc=args.bc,
+                    ), end='', flush=True)
+                    block = BitBlock(bits, di, dbc, eci, ecbc)
+                else:
+                    block = Bits.copy_from(bits, di, dbc)
 
                 # Lock uncontrollable bits
-                for j in itertools.chain(range(0, low), range(high, dbc)):
-                    assert block.set(j, bits[di + j])
+
+                locked_bits = set()
+
+                if not self._only_data:
+                    for j in itertools.chain(range(0, low), range(high, dbc)):
+                        assert block.set(j, bits[di + j])
+                else:
+                    for j in itertools.chain(range(0, low), range(high, dbc)):
+                        locked_bits.add(j)
 
                 targets_index = list(range(di, di+dbc))
                 if not self._only_data:
@@ -124,11 +135,18 @@ class QArtist(QrPainter):
                     else:
                         assert point.type is QrPointType.CORRECTION
                         index = point.offset - eci + dbc
-                    block.set(index, fill)
+                    if not self._only_data:
+                        block.set(index, fill)
+                    elif index not in locked_bits:
+                        block[index] = fill
 
-                new_block_bits = block.bits()
-                data_bits.extend(new_block_bits, 0, dbc)
-                ec_bits.extend(new_block_bits, dbc, ecbc)
+                if not self._only_data:
+                    new_block_bits = block.bits()
+                    data_bits.extend(new_block_bits, 0, dbc)
+                    ec_bits.extend(new_block_bits, dbc, ecbc)
+                else:
+                    data_bits.extend(block)
+                    ec_bits.extend(RSEncoder.encode(block, ecbc // 8, True))
 
                 di += dbc
                 eci += ecbc
