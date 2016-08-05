@@ -53,6 +53,8 @@ The actual result you will see depends on your font setting, I'm using Dejavu Sa
 
 Yes, it is only useful for small QrCode. 
 
+Run `pyqr -h` for more options and their effect.
+
 ### The Art Part
 
 Use `pyqart` CLI to create QArt. It may take a long time, please be patient :)
@@ -84,6 +86,8 @@ Still not satisfied? Use `-y` option to enhance the accuracy of the central regi
 ![][my-qart-y-img]
 
 `-y` and `-n` can be used at the same time, but no obvious improvement.
+
+Run `pyqart -h` for more options and their effect.
 
 ### Use it in your codes as a module
 
