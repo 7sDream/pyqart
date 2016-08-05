@@ -1,5 +1,6 @@
 import argparse
 import sys
+import time
 
 from pyqart.art import QArtist
 from pyqart.qr.printer import QrImagePrinter, QrStringPrinter
@@ -104,6 +105,8 @@ def main():
     if args.background_color is not None:
         args.background_color = tuple(args.background_color)
 
+    start = time.time()
+
     artist = QArtist(args.url, args.img, args.version, args.mask, args.level,
                      args.rotation, args.dither, args.only_data, args.rand,
                      args.yx[0], args.yx[1])
@@ -116,6 +119,9 @@ def main():
         print('Done.')
     else:
         QrStringPrinter.print(artist, True)
+
+    end = time.time()
+    print("Used time:", end-start, 'second.')
 
 if __name__ == '__main__':
     main()
