@@ -4,7 +4,7 @@
 
 ## introduction
 
-QArt is a method of combining QrCode of an URL with any image, which was submitted in [an article][qart_article] writen by [Russ Cox][russ_cos_google_plus] on his personal website.
+QArt is a method of combining QrCode of an URL with any image, which was submitted in [an article][qart-article] writen by [Russ Cox][russ-cos-google-plus] on his personal website.
 
 An Example(come from the article):
 
@@ -18,11 +18,11 @@ This repo is Python implementation of it.
 pip install pyqart
 ```
 
-**Note: Support Python3 only, please make sure you are using pip of Python3.
+**Note: Support Python3 only, please make sure you are using pip of Python3.**
 
 ## Usage
 
-For code reues, I split the lib to two part. One for generate normal QrCode, another for generate QArt.
+For code reuse, I split the lib to two part. One for generate normal QrCode, another for generate QArt.
 
 ### The Qr Part
 
