@@ -37,7 +37,7 @@ Use `pyqr` CLI to create normal QrCode.
  - `-p` for point size of QrQCode, by pixel, default is 3 pixel.
  - `-c` for color of point, default is black. Background color can be set with `-g` option, default is white.
 
-![qr code: hello world][my-qr-image]
+![qr code: hello world][my-qr-img]
 
 If you want show it in terminal, just don't provide `-o` option:
 
