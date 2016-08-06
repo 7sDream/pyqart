@@ -124,9 +124,9 @@ bilibili.com (An ACG videos website)
 - [ ] Docs
 - [ ] Tests
 
-## Other Implement
+## Other Implementation
 
-- Golang: [qr][qr] by [Russ Cox][russ_cos_google_plus]
+- Golang: [qr][qr] by [Russ Cox][russ-cos-google-plus]
 - Java: [qart4j][qart4j] by [dieforfree][dieforfree]
 
 ## Acknowledgements

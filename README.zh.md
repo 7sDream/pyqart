@@ -130,12 +130,12 @@ Github 首页。
 
 ## 其他实现版本
 
-- Golang: [qr][qr] by [Russ Cox][russ_cos_google_plus]
+- Golang: [qr][qr] by [Russ Cox][russ-cos-google-plus]
 - Java: [qart4j][qart4j] by [dieforfree][dieforfree]
 
 ## 致谢
 
-- 所有一切都源自 [Russ Cos][russ_cos_google_plus] 的文章，感谢他。
+- 所有一切都源自 [Russ Cos][russ-cos-google-plus] 的文章，感谢他。
 - 感谢 [dieforfree][dieforfree] 的 [qart4j 项目][qart4j]，它给我提供了很多如何实现 art 部分参考。
 - 感谢 thonky.com 的 [二维码原理指导][tutorial] 系列文章，非常详细，关于编码和纠错中不懂的地方多亏了它。
 - 感谢 Python。
