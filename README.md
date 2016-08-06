@@ -131,7 +131,7 @@ bilibili.com (An ACG videos website)
 
 ## Acknowledgements
 
-- All credit goes to [Russ Cos][russ_cos_google_plus], Thanks for his article and implement.
+- All credit goes to [Russ Cos][russ-cos-google-plus], Thanks for his article and implement.
 - Thanks for [qart4j project][qart4j] by [dieforfree][dieforfree]，which helps me so much on how to implement the art part.
 - Thanks to a series of articles named [QR Code Tutorial][tutorial] in thonky.com, It's very detailed. Whenever I faced problem about encoding or error correction, I will go to it for help.
 - Thanks to the Python programing language。
