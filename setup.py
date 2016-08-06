@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup, find_packages
 
 import pyqart
 
-packages = ['pyqart']
+packages = find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"])
 
 setup(
     name='pyqart',
