@@ -171,6 +171,8 @@ Result：
 - [x] Art part
 - [x] CLI
 - [x] Package
+- [x] Halftone support
+- [x] self-made HalfArt method
 - [ ] GUI
 - [ ] Use Cython to accelerate Reed-Solomon error correction
 - [ ] Docs
