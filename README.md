@@ -159,7 +159,7 @@ Result：
 |  |  |  |
 | :-: | :-: | :-: |
 | ![][halftone.png]| ![][halftone-color.png] | ![][halftone-pixel.png] |
-| halftone | halftone colorful | halftone pixel |
+| Halftone | Halftone colorful | Halftone pixel |
 | ![][qart.png] | ![][qart-data-only.png] | |
 | QArt | QArt data only | |
 | ![][halfart.png] | ![][halfart-data-only.png] | |
