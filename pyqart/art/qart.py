@@ -25,18 +25,25 @@ class QArtist(QrPainter):
         assert isinstance(img, (str, QArtSourceImage))
         if isinstance(img, str):
             img = QArtSourceImage(img)
+        self.source = img
+        self.dy = dy
+        self.dx = dx
         self._only_data = bool(only_data)
         self._higher_first = bool(higher_first)
         data = QrData(url + '#', level)
         super().__init__(data, version, mask, rotation)
         args, _, _ = self.get_params()
         print('Processing input image...', end='', flush=True)
-        self._targets = img.to_targets(self.canvas, args, bool(dither),
-                                       rand, dy, dx)
+        self._targets = self.source.to_targets(
+            self.canvas, args, bool(dither), rand, dy, dx)
+        self.dither = dither
         print('Done.')
+        self._bits = None
 
     @property
     def bits(self):
+        if self._bits is not None:
+            return self._bits
         args, available, used = self.get_params()
         cci_length = args.cci_length_of(Numbers)
         available_for_number = available - 4 - cci_length
@@ -185,6 +192,7 @@ class QArtist(QrPainter):
             if error_count == 0:
                 print(', send to printer.')
                 data_bits.extend(ec_bits)
+                self._bits = data_bits
                 return data_bits
             else:
                 print(', restart.')

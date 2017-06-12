@@ -40,3 +40,4 @@ class RSEncoder(object):
             return Bits.copy_from(bytearray(res))
         else:
             return res
+

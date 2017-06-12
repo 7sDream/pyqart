@@ -2,8 +2,6 @@
 # Author   : 7sDream
 # Usage    : A printer that print QrCode to a image.
 
-from io import BytesIO
-
 from .base import QrBasePrinter
 from ..data import QrData
 
@@ -12,9 +10,17 @@ import PIL.ImageDraw as Draw
 
 
 class QrImagePrinter(QrBasePrinter):
+
+    @classmethod
+    def _calc_point_border_width(cls, point_width, border_width):
+        point_width = int(point_width) if point_width is not None else 1
+        border_width = point_width if border_width is None else border_width
+        border_width = max(1, border_width)
+        return point_width, border_width
+
     @classmethod
     def print(cls, obj, path=None, point_width=None, border_width=None,
-              f_color=None, bg_color=None, format=None):
+              f_color=None, bg_color=None, file_format=None):
         """
         Print the QrCode to a image.
 
@@ -28,17 +34,18 @@ class QrImagePrinter(QrBasePrinter):
         :param border_width: Border width, None will be code width / 20.
         :param (int, int, int) f_color: Front color, Default is black.
         :param (int, int, int) bg_color: Background color, Default is white.
-        :param str format: Image suffix, like png, jpeg, bmp, etc.
+        :param str file_format: Image suffix, like png, jpeg, bmp, etc.
         :return: Bytes data of image **Only when file path is not provided**.
-        :rtype: bytes|None
+        :rtype: PIL.Image
         """
+
+        point_width, border_width = cls._calc_point_border_width(
+            point_width, border_width)
+
         obj = cls._create_painter(obj)
 
         matrix = obj.as_bool_matrix
         size = len(matrix)
-        point_width = int(point_width) if point_width is not None else 1
-        border_width = point_width if border_width is None else border_width
-        border_width = max(1, border_width)
         code_width = size * point_width
         img_size = code_width + 2 * border_width
 
@@ -63,9 +70,7 @@ class QrImagePrinter(QrBasePrinter):
         img.paste(qr_img, (border_width, border_width))
 
         if path is not None:
-            img.save(path, format=format)
+            img.save(path, format=file_format)
             return None
 
-        f = BytesIO()
-        img.save(f, format=format if format is not None else 'png')
-        return f.getvalue()
+        return img

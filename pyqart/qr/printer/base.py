@@ -18,7 +18,7 @@ class QrBasePrinter(object):
         assert isinstance(
             obj,
             (QrPainter, QrData, str, bytes, bytearray)
-        ), "Argument must be QrPainter, QrData, str, bytes or bytearray object."
+        ), "Argument must be QrPainter, QrData, str, bytes or bytearray"
         if isinstance(obj, QrData):
             obj = QrPainter(obj)
         elif isinstance(obj, str):

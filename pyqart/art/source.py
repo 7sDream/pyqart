@@ -27,6 +27,7 @@ class QArtSourceImage(object):
         if size is None:
             size = min(self._img.width - left, self._img.height - top)
         self._set(left or 0, top or 0, size or 0, board or 0)
+        self.path = path
 
     def _set(self, left, top, size, border):
         assert left >= 0, "left arg must > 0"
@@ -90,6 +91,25 @@ class QArtSourceImage(object):
 
         return sum_2 / n - average * average
 
+    def to_image(self, args, dither, dy, dx):
+        assert dx is None or dx > 0, 'dx must >= 0.'
+        assert dy is None or dy > 0, 'dy must >= 0.'
+
+        code_part_size = self._size - 2 * self._border
+
+        box_x, box_y = self._left + self._border, self._top + self._border
+        box = (box_x, box_y, box_x + code_part_size, box_y + code_part_size)
+        img = self._img.crop(box).resize((args.size, args.size))
+
+        if dither:
+            img = img.convert("1")
+        else:
+            img = img.convert('L')
+            divider = self._calc_divider(img)
+            img = img.point(lambda v: 0 if v <= divider else 255, '1')
+
+        return img
+
     def to_targets(self, canvas, args, dither, rand, dy, dx):
         """
         :param QrCanvas canvas: canvas used to draw the QrCode.
@@ -99,21 +119,7 @@ class QArtSourceImage(object):
         :param int dy: Y offset when calc target.
         :param int dx: X offset when calc target.
         """
-        assert dx is None or dx > 0, 'dx must >= 0.'
-        assert dy is None or dy > 0, 'dy must >= 0.'
-
-        code_part_size = self._size - 2 * self._border
-
-        box_x, box_y = self._left + self._border, self._top + self._border
-        box = (box_x, box_y, box_x + code_part_size, box_y + code_part_size)
-        temp = self._img.crop(box).resize((args.size, args.size))
-
-        if dither:
-            temp = temp.convert("1")
-        else:
-            temp = temp.convert('L')
-            divider = self._calc_divider(temp)
-            temp = temp.point(lambda v: 0 if v <= divider else 255, '1')
+        temp = self.to_image(args, dither, dy, dx)
 
         targets = [None] * args.cwc * 8
         for y in range(temp.height):

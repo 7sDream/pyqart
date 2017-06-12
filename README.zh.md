@@ -117,12 +117,66 @@ Github 首页。
 
 哔哩哔哩。
 
+# Halftone 支持
+
+0.1.0 版本增加了 Halftone 支持，另外也实现了一种结合了 QArt 和 Halftone 的新算法，我暂时命名为 HalfArt。
+
+以下代码展示了输出各种格式的所需参数：
+
+```python
+from pyqart import QArtist, QrHalftonePrinter, QrImagePrinter, QrPainter
+
+QR_VERSION = 10
+POINT_PIXEL = 3
+
+artist = QArtist('http://www.nankai.edu.cn/', 'example.jpg', QR_VERSION)
+painter = QrPainter('http://www.nankai.edu.cn/', QR_VERSION)
+artist_data_only = QArtist('http://www.nankai.edu.cn/', 'example.jpg',
+                           QR_VERSION, only_data=True)
+
+# normal
+QrImagePrinter.print(painter, path='normal.png', point_width=POINT_PIXEL)
+# Halftone
+QrHalftonePrinter.print(painter, path='halftone.png', img='example.jpg',
+                        point_width=POINT_PIXEL, colorful=False)
+# Halftone colorful
+QrHalftonePrinter.print(painter, path='halftone-color.png', img='example.jpg',
+                        point_width=POINT_PIXEL)
+# Halftone pixel
+QrHalftonePrinter.print(painter, path='halftone-pixel.png', img='example.jpg',
+                        point_width=POINT_PIXEL, colorful=False,
+                        pixelization=True)
+# QArt
+QrImagePrinter.print(artist, path='qart.png', point_width=POINT_PIXEL)
+# QArt data only
+QrImagePrinter.print(artist_data_only, path='qart-data-only.png',
+                     point_width=POINT_PIXEL)
+# HalfArt
+QrHalftonePrinter.print(artist, path='halfart.png', point_width=POINT_PIXEL)
+# HalfArt data only
+QrHalftonePrinter.print(artist_data_only, path='halfart-data-only.png',
+                        point_width=POINT_PIXEL)
+```
+
+结果如下表：
+
+|  |  |  |
+| :-: | :-: | :-: |
+| ![][halftone.png]| ![][halftone-color.png] | ![][halftone-pixel.png] |
+| halftone | halftone colorful | halftone pixel |
+| ![][qart.png] | ![][qart-data-only.png] | |
+| QArt | QArt data only | |
+| ![][halfart.png] | ![][halfart-data-only.png] | |
+| HalfArt | HalfArt data only | |
+
 ## TODO
 
 - [x] 让 QrPainter 能自己决定参数
 - [x] Art 部分
 - [x] CLI
 - [x] 打包
+- [x] Halftone 支持
+- [x] 自制 HalfArt 方法
 - [ ] GUI
 - [ ] 使用 Cython 加快里德所罗门码编码速度
 - [ ] 文档
@@ -164,3 +218,11 @@ MIT。
 [python-qr]: http://ww1.sinaimg.cn/large/88e401f0gw1f6iz81tkwpj204x04xaaf.jpg
 [github-qr]: http://ww4.sinaimg.cn/large/88e401f0gw1f6izdtv2kqj204x04x0sy.jpg
 [bilibili-qr]: http://ww3.sinaimg.cn/large/88e401f0gw1f6j0ds93k9j204x04x74m.jpg
+
+[halftone.png]: http://rikka-10066868.image.myqcloud.com/f62cbc2f-1e38-4a94-80aa-0be1a0c32b55.png
+[halftone-color.png]: http://rikka-10066868.image.myqcloud.com/d96d057a-42d2-469b-9b65-0eabd2bd915f.png
+[halftone-pixel.png]: http://rikka-10066868.image.myqcloud.com/00da6fa8-5035-4ba6-8c33-584b54e73e2d.png
+[qart.png]: http://rikka-10066868.image.myqcloud.com/d2f3febb-a535-4154-8ebc-80183701c47d.png
+[qart-data-only.png]: http://rikka-10066868.image.myqcloud.com/59834cea-5d44-41c3-b759-780c56c9789b.png
+[halfart.png]: http://rikka-10066868.image.myqcloud.com/8b0847b9-c3fc-451d-b554-7bdc3a53f7e9.png
+[halfart-data-only.png]: http://rikka-10066868.image.myqcloud.com/9f4fd92e-99ff-4aca-a252-b6c1ab709e65.png
