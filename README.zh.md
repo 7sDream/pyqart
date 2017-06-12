@@ -117,9 +117,11 @@ Github 首页。
 
 哔哩哔哩。
 
-# Halftone 支持
+## Halftone 和 HalfArt 支持
 
 0.1.0 版本增加了 Halftone 支持，另外也实现了一种结合了 QArt 和 Halftone 的新算法，我暂时命名为 HalfArt。
+
+## 各方法所用参数
 
 以下代码展示了输出各种格式的所需参数：
 
@@ -158,7 +160,7 @@ QrHalftonePrinter.print(artist_data_only, path='halfart-data-only.png',
                         point_width=POINT_PIXEL)
 ```
 
-结果如下表：
+### 各方法结果样例
 
 |  |  |  |
 | :-: | :-: | :-: |

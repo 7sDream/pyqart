@@ -113,9 +113,11 @@ github.com
 
 bilibili.com (An ACG videos website)
 
-## Halftone
+## Halftone and HalfArt support
 
 Halftone support added in version 0.1.0, and I made another new method which combined Halftone and QArt, so I call it HalfArt temporarily.
+
+## Arguments for all methods
 
 The following code shows arguments to get output image of all kind of method:
 
@@ -154,7 +156,7 @@ QrHalftonePrinter.print(artist_data_only, path='halfart-data-only.png',
                         point_width=POINT_PIXEL)
 ```
 
-Result：
+### Result example for all method
 
 |  |  |  |
 | :-: | :-: | :-: |
